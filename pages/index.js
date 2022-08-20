@@ -105,7 +105,7 @@ export default function Home() {
             Pending ({todos.filter((x) => x.completed === false).length}){" "}
           </span>
           <span className="text-success">
-            Completed ({todos.filter((x) => x.completed === true).length})
+            Completed ({todos.filter((x) => x.completed === true).length}){" "}
           </span>
         </p>
 
