@@ -16,12 +16,17 @@ export default function Home() {
     if (!todoStr) {
       setTodos([]);
     } else {
-      setTodos(JSON.parse(todosStr));
+      setTodos(JSON.parse(todoStr));
     }
   }, []);
 
+  const saveTodos = () => {
+    const todosStr = JSON.stringify(todos);
+    localStorage.setItem("react-todos", todosStr);
+  };
+
   const [isFirstRender, setsFirstRender] = useState(true);
-  useState(() => {
+  useEffect(() => {
     if (isFirstRender) {
       setsFirstRender(false);
       return;
@@ -63,11 +68,6 @@ export default function Home() {
     setTodos([...todos]);
   };
 
-  const saveTodos = () => {
-    const todosStr = JSON.stringify(todos);
-    localStorage.setItem("react-todos", todosStr);
-  };
-
   return (
     <div>
       {/* Entire App container (required for centering) */}
@@ -102,7 +102,7 @@ export default function Home() {
         <p className="text-center fs-4">
           <span className="text-primary">All ({todos.length}) </span>
           <span className="text-warning">
-            Pending ({todos.filter((x) => x.completed === false).length})
+            Pending ({todos.filter((x) => x.completed === false).length}){" "}
           </span>
           <span className="text-success">
             Completed ({todos.filter((x) => x.completed === true).length})
